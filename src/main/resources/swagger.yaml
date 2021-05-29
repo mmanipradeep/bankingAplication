@@ -1,0 +1,143 @@
+swagger: '2.0'
+info:
+  description: 'This is a sample Banking applicaiton.  You can find out more about Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, you can use the api key `special-key` to test the authorization filters.'
+  version: 1.0.5
+  title: Swagger Banking System
+  termsOfService: 'http://swagger.io/terms/'
+  contact:
+    email: apiteam@swagger.io
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+host: petstore.swagger.io
+basePath: /v2
+tags:
+  - name: Banking features
+    description: Everything about your Pets
+    externalDocs:
+      description: Find out more
+      url: 'http://swagger.io'
+schemes:
+  - https
+  - http
+paths:
+  '/transaction/{sourceAccount}/{targetAccount}/{amount}':
+    post:
+      tags:
+        - Funds Transfer
+      summary: Check the Account Balance
+      description: ''
+      operationId: doFundTransfer
+      produces:
+        - application/json
+      parameters:
+        - name: sourceAccount
+          in: path
+          description: ID of pet to update
+          required: true
+          type: integer
+          format: int64
+        - name: targetAccount
+          in: path
+          description: ID of pet to update
+          required: true
+          type: integer
+          format: int64
+        - name: amount
+          in: path
+          description: Updated status of the pet
+          required: true
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/ApiResponse'
+   
+  '/account/checkAccountBalance/{accountNumber}':
+    get:
+      tags:
+        -  Account Balance
+      summary: Transfer funds from one account to other account
+      description: Multiple status values can be provided with comma separated strings
+      operationId: doCheckBalance
+      produces:
+        - application/json
+        - application/xml
+      parameters:
+        - name: accountNumber
+          in: path
+          description: Status values that need to be considered for filter
+          required: true
+          type : string
+          default: available
+         
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Account'
+        '400':
+          description: Invalid status value
+  
+definitions:
+  ApiResponse:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      type:
+        type: string
+      message:
+        type: string
+  Transaction:
+    type: object
+    required :
+     - sourceAccount
+     - targetAccount
+     - amount
+     - transactionDate
+     - creditDebitFlag
+     
+    properties:
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+      accountNumber :
+        type : string
+      amount :
+        type : string
+      transactionDate :
+        type : string
+      creditDebitFlag :
+        type : string
+        
+    xml:
+      name: Category
+  Account:
+    type: object
+    required:
+      - bankName
+      - currentBalance
+      - accountNumber
+    properties:
+      id:
+        type: integer
+        format: int64
+      Transaction:
+        $ref: '#/definitions/Transaction'
+      bankName :
+        type : string
+      currentBalance :
+        type : string
+      accountNumber :
+        type : string
+        
+externalDocs:
+  description: Find out more about Swagger
+  url: 'http://swagger.io'
