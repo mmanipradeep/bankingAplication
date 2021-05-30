@@ -1,0 +1,126 @@
+openapi: 3.0.1
+info:
+  contact:
+    email: apiteam@swagger.io
+  description: 'This is a sample Banking applicaiton.  You can find out more about
+    Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For
+    this sample, you can use the api key `special-key` to test the authorization filters.'
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Swagger Banking System
+  version: 1.0.5
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+servers:
+- url: http://localhost/
+tags:
+- description: Everything about your Pets
+  externalDocs:
+    description: Find out more
+    url: http://swagger.io
+  name: Banking features
+paths:
+  /transaction/{sourceAccount}/{targetAccount}/{amount}:
+    post:
+      operationId: doFundTransfer
+      parameters:
+      - description: ID of pet to update
+        in: path
+        name: sourceAccount
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - description: ID of pet to update
+        in: path
+        name: targetAccount
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - description: Updated status of the pet
+        in: path
+        name: amount
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+          description: successful operation
+      summary: Check the Account Balance
+      tags:
+      - Funds Transfer
+      x-accepts: application/json
+  /account/checkAccountBalance/{accountNumber}:
+    get:
+      description: Multiple status values can be provided with comma separated strings
+      operationId: doCheckBalance
+      parameters:
+      - description: Status values that need to be considered for filter
+        in: path
+        name: accountNumber
+        required: true
+        schema:
+          default: available
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Account'
+                type: array
+          description: successful operation
+        "400":
+          content: {}
+          description: Invalid status value
+      summary: Transfer funds from one account to other account
+      tags:
+      - Account Balance
+      x-accepts: application/json
+components:
+  schemas:
+    ApiResponse:
+      example:
+        code: 0
+        type: type
+        message: message
+      properties:
+        code:
+          format: int32
+          type: integer
+        type:
+          type: string
+        message:
+          type: string
+      type: object
+    Account:
+      example:
+        currentBalance: currentBalance
+        bankName: bankName
+        id: id
+        accountNumber: accountNumber
+      properties:
+        id:
+          type: string
+        bankName:
+          type: string
+        currentBalance:
+          type: string
+        accountNumber:
+          type: string
+      required:
+      - accountNumber
+      - bankName
+      - currentBalance
+      type: object
+x-original-swagger-version: "2.0"
+

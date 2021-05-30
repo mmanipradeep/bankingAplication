@@ -3,39 +3,43 @@ package com.openapi.banking.model;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.validation.annotation.Validated;
 
-import javax.persistence.*;
-import javax.validation.Valid;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.validation.constraints.*;
 
 /**
  * Account
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2021-05-29T18:26:03.564+05:30")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2021-05-30T13:23:07.394Z")
 
 @Entity
+@Data
 public class Account   {
+
   @Id
   @GeneratedValue(generator = "uuid")
   @GenericGenerator(name = "uuid", strategy = "uuid2")
   @JsonProperty("id")
-  private String id = null;
-
-  @JsonProperty("Transaction")
-  @OneToOne(cascade = CascadeType.ALL)
-  private Transaction transaction = null;
+  private String id ;
 
   @JsonProperty("bankName")
-  private String bankName = null;
+  private String bankName;
 
   @JsonProperty("currentBalance")
-  private String currentBalance = null;
+  private Integer currentBalance;
 
   @JsonProperty("accountNumber")
-  private String accountNumber = null;
+  private String accountNumber;
+
+  transient
+  @JsonProperty("status")
+  private String status;
 
   public Account id(String id) {
     this.id = id;
@@ -55,27 +59,6 @@ public class Account   {
 
   public void setId(String id) {
     this.id = id;
-  }
-
-  public Account transaction(Transaction transaction) {
-    this.transaction = transaction;
-    return this;
-  }
-
-  /**
-   * Get transaction
-   * @return transaction
-   **/
-  @ApiModelProperty(value = "")
-
-  @Valid
-
-  public Transaction getTransaction() {
-    return transaction;
-  }
-
-  public void setTransaction(Transaction transaction) {
-    this.transaction = transaction;
   }
 
   public Account bankName(String bankName) {
@@ -99,7 +82,7 @@ public class Account   {
     this.bankName = bankName;
   }
 
-  public Account currentBalance(String currentBalance) {
+  public Account currentBalance(Integer currentBalance) {
     this.currentBalance = currentBalance;
     return this;
   }
@@ -112,11 +95,11 @@ public class Account   {
   @NotNull
 
 
-  public String getCurrentBalance() {
+  public Integer getCurrentBalance() {
     return currentBalance;
   }
 
-  public void setCurrentBalance(String currentBalance) {
+  public void setCurrentBalance(Integer currentBalance) {
     this.currentBalance = currentBalance;
   }
 
@@ -152,7 +135,6 @@ public class Account   {
     }
     Account account = (Account) o;
     return Objects.equals(this.id, account.id) &&
-            Objects.equals(this.transaction, account.transaction) &&
             Objects.equals(this.bankName, account.bankName) &&
             Objects.equals(this.currentBalance, account.currentBalance) &&
             Objects.equals(this.accountNumber, account.accountNumber);
@@ -160,7 +142,7 @@ public class Account   {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, transaction, bankName, currentBalance, accountNumber);
+    return Objects.hash(id, bankName, currentBalance, accountNumber);
   }
 
   @Override
@@ -169,7 +151,6 @@ public class Account   {
     sb.append("class Account {\n");
 
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
-    sb.append("    transaction: ").append(toIndentedString(transaction)).append("\n");
     sb.append("    bankName: ").append(toIndentedString(bankName)).append("\n");
     sb.append("    currentBalance: ").append(toIndentedString(currentBalance)).append("\n");
     sb.append("    accountNumber: ").append(toIndentedString(accountNumber)).append("\n");

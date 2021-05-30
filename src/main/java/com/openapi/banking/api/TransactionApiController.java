@@ -1,29 +1,25 @@
 package com.openapi.banking.api;
 
-import com.openapi.banking.model.ModelApiResponse;
+import com.openapi.banking.impl.AccountService;
+import com.openapi.banking.model.Account;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.multipart.MultipartFile;
 
-import javax.validation.constraints.*;
-import javax.validation.Valid;
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
-import java.util.List;
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2021-05-29T17:11:20.353+05:30")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2021-05-30T13:23:07.394Z")
 
 @Controller
 public class TransactionApiController implements TransactionApi {
+
+    @Autowired
+    private AccountService accountSerice;
 
     private static final Logger log = LoggerFactory.getLogger(TransactionApiController.class);
 
@@ -37,18 +33,21 @@ public class TransactionApiController implements TransactionApi {
         this.request = request;
     }
 
-    public ResponseEntity<ModelApiResponse> doFundTransfer(@ApiParam(value = "ID of pet to update",required=true) @PathVariable("sourceAccount") Long sourceAccount,@ApiParam(value = "ID of pet to update",required=true) @PathVariable("targetAccount") Long targetAccount,@ApiParam(value = "Updated status of the pet",required=true) @PathVariable("amount") String amount) {
-        String accept = request.getHeader("Accept");
-        if (accept != null && accept.contains("application/json")) {
-            try {
-                return new ResponseEntity<ModelApiResponse>(objectMapper.readValue("{  \"code\" : 0,  \"type\" : \"type\",  \"message\" : \"message\"}", ModelApiResponse.class), HttpStatus.NOT_IMPLEMENTED);
-            } catch (IOException e) {
-                log.error("Couldn't serialize response for content type application/json", e);
-                return new ResponseEntity<ModelApiResponse>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
+    public ResponseEntity<Account> doFundTransfer(@ApiParam(value = "ID of pet to update",required=true) @PathVariable("sourceAccount") String sourceAccount, @ApiParam(value = "ID of pet to update",required=true) @PathVariable("targetAccount") String targetAccount, @ApiParam(value = "Updated status of the pet",required=true) @PathVariable("amount") Integer amount) {
+        Account account=null;
+        try{
+            ResponseEntity<Account> response = null;
+            Account source =accountSerice.getAccountBalance(sourceAccount);
+            source.setCurrentBalance(source.getCurrentBalance()-amount);
+            Account target = accountSerice.getAccountBalance(targetAccount);
+            target.setCurrentBalance(target.getCurrentBalance()+amount);
+            account = accountSerice.doFundTransfer(source,target);
+            System.out.println("Amount ****"+account.getCurrentBalance());
+        }catch(Exception e){
+            e.printStackTrace();
         }
-
-        return new ResponseEntity<ModelApiResponse>(HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity<Account>(account, HttpStatus.OK);
     }
+
 
 }
