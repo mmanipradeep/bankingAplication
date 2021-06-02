@@ -1,9 +1,11 @@
 package com.openapi.banking.model;
 
+import java.io.Serializable;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.validation.annotation.Validated;
 
@@ -20,7 +22,8 @@ import javax.validation.constraints.*;
 
 @Entity
 @Data
-public class Account   {
+
+public class Account implements Serializable {
 
   @Id
   @GeneratedValue(generator = "uuid")
@@ -35,11 +38,21 @@ public class Account   {
   private Integer currentBalance;
 
   @JsonProperty("accountNumber")
+  @NotEmpty(message = "AccountNumber cannot be empty")
   private String accountNumber;
 
   transient
   @JsonProperty("status")
   private String status;
+
+  public Account() {}
+
+  public Account(String id, String bankName, Integer currentBalance, String status) {
+    setId(id);
+    setBankName(bankName);
+    setCurrentBalance(currentBalance);
+    setAccountNumber(status);
+  }
 
   public Account id(String id) {
     this.id = id;

@@ -5,6 +5,8 @@ org\openapitools\client\ApiResponse.class
 com\openapi\banking\api\AccountApiController.class
 io\swagger\configuration\HomeController.class
 com\openapi\banking\model\ModelApiResponse.class
+com\openapi\banking\model\ExceptionResponse.class
+com\openapi\banking\api\ExtendedControllerAdvice.class
 org\openapitools\client\GzipRequestInterceptor.class
 com\openapi\banking\repository\AccountRepository.class
 io\swagger\configuration\JacksonConfiguration.class
@@ -12,6 +14,7 @@ org\openapitools\client\JSON$1.class
 org\openapitools\client\ApiClient$3.class
 com\openapi\banking\api\ApiOriginFilter.class
 org\openapitools\client\Pair.class
+com\openapi\banking\exception\ResourceNotFoundException.class
 io\swagger\configuration\CustomInstantDeserializer$3.class
 com\openapi\banking\api\TransactionApiController.class
 org\openapitools\client\JSON$OffsetDateTimeTypeAdapter.class

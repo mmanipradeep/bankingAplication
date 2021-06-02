@@ -2,7 +2,7 @@
 
 Swagger Banking System
 - API version: 1.0.5
-  - Build date: 2021-05-30T21:52:47.849731+05:30[Asia/Calcutta]
+  - Build date: 2021-06-02T08:38:30.494423700+05:30[Asia/Calcutta]
 
 This is a sample Banking applicaiton.  You can find out more about Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, you can use the api key `special-key` to test the authorization filters.
 
@@ -85,7 +85,7 @@ public class Example {
     defaultClient.setBasePath("http://localhost");
 
     AccountBalanceApi apiInstance = new AccountBalanceApi(defaultClient);
-    String accountNumber = "available"; // String | Status values that need to be considered for filter
+    String accountNumber = "\"available\""; // String | Status values that need to be considered for filter
     try {
       List<Account> result = apiInstance.doCheckBalance(accountNumber);
       System.out.println(result);

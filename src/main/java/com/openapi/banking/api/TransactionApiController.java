@@ -13,6 +13,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Optional;
+
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2021-05-30T13:23:07.394Z")
 
 @Controller
@@ -39,7 +41,8 @@ public class TransactionApiController implements TransactionApi {
             ResponseEntity<Account> response = null;
             Account source =accountSerice.getAccountBalance(sourceAccount);
             source.setCurrentBalance(source.getCurrentBalance()-amount);
-            Account target = accountSerice.getAccountBalance(targetAccount);
+
+           Account target = accountSerice.getAccountBalance(targetAccount);
             target.setCurrentBalance(target.getCurrentBalance()+amount);
             account = accountSerice.doFundTransfer(source,target);
             System.out.println("Amount ****"+account.getCurrentBalance());

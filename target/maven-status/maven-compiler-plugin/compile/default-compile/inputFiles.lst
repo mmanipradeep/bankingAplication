@@ -3,7 +3,6 @@ C:\Users\mmani\Desktop\bankingAplication\target\generated-sources\openapi\src\ma
 C:\Users\mmani\Desktop\bankingAplication\src\main\java\com\openapi\banking\api\AccountApiController.java
 C:\Users\mmani\Desktop\bankingAplication\src\main\java\com\openapi\banking\utils\ReportingUtils.java
 C:\Users\mmani\Desktop\bankingAplication\target\generated-sources\openapi\src\main\java\org\openapitools\client\JSON.java
-C:\Users\mmani\Desktop\bankingAplication\src\main\java\com\openapi\banking\exception\AccountExceptionHandler.java
 C:\Users\mmani\Desktop\bankingAplication\src\main\java\com\openapi\banking\model\Account.java
 C:\Users\mmani\Desktop\bankingAplication\target\generated-sources\openapi\src\main\java\org\openapitools\client\GzipRequestInterceptor.java
 C:\Users\mmani\Desktop\bankingAplication\target\generated-sources\openapi\src\main\java\org\openapitools\client\ProgressResponseBody.java
@@ -31,7 +30,6 @@ C:\Users\mmani\Desktop\bankingAplication\src\main\java\io\swagger\configuration\
 C:\Users\mmani\Desktop\bankingAplication\src\main\java\io\swagger\configuration\HomeController.java
 C:\Users\mmani\Desktop\bankingAplication\src\main\java\com\openapi\banking\api\NotFoundException.java
 C:\Users\mmani\Desktop\bankingAplication\target\generated-sources\openapi\src\main\java\org\openapitools\client\api\FundsTransferApi.java
-C:\Users\mmani\Desktop\bankingAplication\src\main\java\com\openapi\banking\exception\AccountNotFoundException.java
 C:\Users\mmani\Desktop\bankingAplication\target\generated-sources\openapi\src\main\java\org\openapitools\client\ProgressRequestBody.java
 C:\Users\mmani\Desktop\bankingAplication\src\main\java\com\openapi\banking\api\TransactionApiController.java
 C:\Users\mmani\Desktop\bankingAplication\src\main\java\com\openapi\banking\api\ApiException.java

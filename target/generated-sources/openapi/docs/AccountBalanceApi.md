@@ -30,7 +30,7 @@ public class Example {
     defaultClient.setBasePath("http://localhost");
 
     AccountBalanceApi apiInstance = new AccountBalanceApi(defaultClient);
-    String accountNumber = "available"; // String | Status values that need to be considered for filter
+    String accountNumber = "\"available\""; // String | Status values that need to be considered for filter
     try {
       List<Account> result = apiInstance.doCheckBalance(accountNumber);
       System.out.println(result);
@@ -49,7 +49,7 @@ public class Example {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **accountNumber** | **String**| Status values that need to be considered for filter | [default to available]
+ **accountNumber** | **String**| Status values that need to be considered for filter | [default to &quot;available&quot;]
 
 ### Return type
 
